@@ -11,7 +11,7 @@ function createWindow() {
   });
 
   win.loadFile(path.join(__dirname, 'index.html'));
-  // win.removeMenu(); // optional: remove the menu bar
+  win.removeMenu(); // optional: remove the menu bar
 }
 
 app.whenReady().then(() => {
