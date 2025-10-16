@@ -1,5 +1,5 @@
 ﻿{
-	"version": 1760525698,
+	"version": 1760596100,
 	"fileList": [
 		"data.js",
 		"c2runtime.js",
@@ -10,6 +10,8 @@
 		"images/enemyprojectileplaceholder-sheet0.png",
 		"images/enemyspawner-sheet0.png",
 		"images/gamebackground.png",
+		"images/startbutton-sheet0.png",
+		"images/quitbutton-sheet0.png",
 		"icon-16.png",
 		"icon-32.png",
 		"icon-114.png",
