@@ -1,36 +1,27 @@
 {
-  "name": "bebek-kotak",
+  "devDependencies": {
+    "electron": "^38.3.0",
+    "electron-builder": "^26.0.12"
+  },
+  "name": "bebekkotak",
   "version": "1.0.0",
   "description": "",
   "main": "main.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "electron .",
+    "start": "electron . --trace-warnings",
     "build:win": "electron-builder --win"
   },
     "build": {
-    "appId": "com.mycompany.myapp",
-    "productName": "MyApp",
+    "appId": "com.mycompany.bebekkotak",
+    "productName": "Bebek Kotak",
     "win": {
-      "target": "nsis", 
+      "target": "nsis",
       "icon": "icon.ico"
     }
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Oreo-1/Bebek-Kotak.git"
-  },
-  
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "type": "commonjs",
-  "bugs": {
-    "url": "https://github.com/Oreo-1/Bebek-Kotak/issues"
-  },
-  "homepage": "https://github.com/Oreo-1/Bebek-Kotak#readme",
-  "devDependencies": {
-    "electron": "^38.2.2",
-    "electron-builder": "^26.0.12"
-  }
+  "type": "commonjs"
 }
