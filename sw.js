@@ -382,22 +382,22 @@ self.addEventListener("fetch", event =>
 	 *  events are triggered. By returning we allow the default action to
 	 *  occur instead. Currently all cross-origin requests fall back to default.
 	 */
-	// if (new URL(event.request.url).origin !== location.origin)
-	// 	return;
+	if (new URL(event.request.url).origin !== location.origin)
+		return;
 		
 	// Check for an update on navigate requests
-	// const doUpdateCheck = (event.request.mode === "navigate");
+	const doUpdateCheck = (event.request.mode === "navigate");
 	
-	// const responsePromise = HandleFetch(event, doUpdateCheck);
+	const responsePromise = HandleFetch(event, doUpdateCheck);
 
-	// if (doUpdateCheck)
-	// {
+	if (doUpdateCheck)
+	{
 		// allow the main request to complete, then check for updates
 		event.waitUntil(
 			responsePromise
 			.then(() => UpdateCheck(false))		 // not first check
 		);
-	// }
+	}
 
 	event.respondWith(responsePromise);
 });
