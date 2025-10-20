@@ -376,19 +376,6 @@ async function HandleFetch(event, doUpdateCheck)
 
 self.addEventListener("fetch", event =>
 {
-	/** NOTE (iain)
-	 *  This check is to prevent a bug with XMLHttpRequest where if its
-	 *  proxied with "FetchEvent.prototype.respondWith" no upload progress
-	 *  events are triggered. By returning we allow the default action to
-	 *  occur instead. Currently all cross-origin requests fall back to default.
-	 */
-	if (new URL(event.request.url).origin !== location.origin)
-		return;
-		
-	// Check for an update on navigate requests
-	const doUpdateCheck = (event.request.mode === "navigate");
-	
-	const responsePromise = HandleFetch(event, doUpdateCheck);
 
 	if (doUpdateCheck)
 	{
@@ -399,5 +386,4 @@ self.addEventListener("fetch", event =>
 		);
 	}
 
-	event.respondWith(responsePromise);
 });
