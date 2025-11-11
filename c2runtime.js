@@ -21397,8 +21397,6 @@ cr.behaviors.Bullet = function(runtime)
 	behaviorProto.exps = new Exps();
 }());
 cr.getObjectRefTable = function () { return [
-	cr.plugins_.AJAX,
-	cr.plugins_.Browser,
 	cr.plugins_.Dictionary,
 	cr.plugins_.Function,
 	cr.plugins_.Keyboard,
@@ -21409,6 +21407,8 @@ cr.getObjectRefTable = function () { return [
 	cr.plugins_.Text,
 	cr.plugins_.TiledBg,
 	cr.plugins_.Touch,
+	cr.plugins_.AJAX,
+	cr.plugins_.Browser,
 	cr.behaviors.Bullet,
 	cr.system_object.prototype.cnds.IsGroupActive,
 	cr.system_object.prototype.cnds.EveryTick,
@@ -21480,6 +21480,7 @@ cr.getObjectRefTable = function () { return [
 	cr.system_object.prototype.exps.floor,
 	cr.system_object.prototype.acts.ResetGlobals,
 	cr.plugins_.Text.prototype.cnds.PickByUID,
+	cr.plugins_.Text.prototype.acts.SetWidth,
 	cr.plugins_.Sprite.prototype.cnds.PickByUID,
 	cr.plugins_.Sprite.prototype.acts.AddInstanceVar,
 	cr.plugins_.LocalStorage.prototype.acts.CheckItemExists,
@@ -21537,10 +21538,9 @@ cr.getObjectRefTable = function () { return [
 	cr.plugins_.Sprite.prototype.cnds.IsVisible,
 	cr.system_object.prototype.cnds.LayerVisible,
 	cr.plugins_.Sprite.prototype.exps.LayerName,
-	cr.plugins_.Sprite.prototype.acts.SetAnimFrame,
 	cr.plugins_.Mouse.prototype.cnds.IsButtonDown,
-	cr.plugins_.Sprite.prototype.acts.SetScale,
 	cr.plugins_.Dictionary.prototype.cnds.CompareValue,
+	cr.plugins_.Sprite.prototype.acts.SetAnimFrame,
 	cr.plugins_.Keyboard.prototype.cnds.OnKey
 ];};
 
