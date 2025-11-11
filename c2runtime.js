@@ -21560,6 +21560,86 @@ cr.behaviors.Pin = function(runtime)
 	};
 	behaviorProto.exps = new Exps();
 }());
+;
+;
+cr.behaviors.Rotate = function(runtime)
+{
+	this.runtime = runtime;
+};
+(function ()
+{
+	var behaviorProto = cr.behaviors.Rotate.prototype;
+	behaviorProto.Type = function(behavior, objtype)
+	{
+		this.behavior = behavior;
+		this.objtype = objtype;
+		this.runtime = behavior.runtime;
+	};
+	var behtypeProto = behaviorProto.Type.prototype;
+	behtypeProto.onCreate = function()
+	{
+	};
+	behaviorProto.Instance = function(type, inst)
+	{
+		this.type = type;
+		this.behavior = type.behavior;
+		this.inst = inst;				// associated object instance to modify
+		this.runtime = type.runtime;
+	};
+	var behinstProto = behaviorProto.Instance.prototype;
+	behinstProto.onCreate = function()
+	{
+		this.speed = cr.to_radians(this.properties[0]);
+		this.acc = cr.to_radians(this.properties[1]);
+	};
+	behinstProto.saveToJSON = function ()
+	{
+		return {
+			"speed": this.speed,
+			"acc": this.acc
+		};
+	};
+	behinstProto.loadFromJSON = function (o)
+	{
+		this.speed = o["speed"];
+		this.acc = o["acc"];
+	};
+	behinstProto.tick = function ()
+	{
+		var dt = this.runtime.getDt(this.inst);
+		if (dt === 0)
+			return;
+		if (this.acc !== 0)
+			this.speed += this.acc * dt;
+		if (this.speed !== 0)
+		{
+			this.inst.angle = cr.clamp_angle(this.inst.angle + this.speed * dt);
+			this.inst.set_bbox_changed();
+		}
+	};
+	function Cnds() {};
+	behaviorProto.cnds = new Cnds();
+	function Acts() {};
+	Acts.prototype.SetSpeed = function (s)
+	{
+		this.speed = cr.to_radians(s);
+	};
+	Acts.prototype.SetAcceleration = function (a)
+	{
+		this.acc = cr.to_radians(a);
+	};
+	behaviorProto.acts = new Acts();
+	function Exps() {};
+	Exps.prototype.Speed = function (ret)
+	{
+		ret.set_float(cr.to_degrees(this.speed));
+	};
+	Exps.prototype.Acceleration = function (ret)
+	{
+		ret.set_float(cr.to_degrees(this.acc));
+	};
+	behaviorProto.exps = new Exps();
+}());
 cr.getObjectRefTable = function () { return [
 	cr.plugins_.Dictionary,
 	cr.plugins_.Function,
@@ -21573,6 +21653,7 @@ cr.getObjectRefTable = function () { return [
 	cr.plugins_.Touch,
 	cr.plugins_.AJAX,
 	cr.plugins_.Browser,
+	cr.behaviors.Rotate,
 	cr.behaviors.Bullet,
 	cr.behaviors.Pin,
 	cr.system_object.prototype.cnds.IsGroupActive,
@@ -21633,8 +21714,9 @@ cr.getObjectRefTable = function () { return [
 	cr.plugins_.Sprite.prototype.acts.SetPos,
 	cr.plugins_.Sprite.prototype.exps.Y,
 	cr.plugins_.Sprite.prototype.exps.Height,
-	cr.system_object.prototype.exps.angle,
+	cr.system_object.prototype.acts.CreateObject,
 	cr.plugins_.Sprite.prototype.exps.X,
+	cr.system_object.prototype.exps.angle,
 	cr.plugins_.Sprite.prototype.acts.SetOpacity,
 	cr.plugins_.Function.prototype.acts.SetReturnValue,
 	cr.system_object.prototype.cnds.For,
@@ -21645,7 +21727,6 @@ cr.getObjectRefTable = function () { return [
 	cr.system_object.prototype.exps.floor,
 	cr.system_object.prototype.acts.ResetGlobals,
 	cr.plugins_.Text.prototype.cnds.PickByUID,
-	cr.system_object.prototype.acts.CreateObject,
 	cr.plugins_.Text.prototype.exps.X,
 	cr.plugins_.Text.prototype.exps.Y,
 	cr.plugins_.Sprite.prototype.exps.UID,
@@ -21670,6 +21751,7 @@ cr.getObjectRefTable = function () { return [
 	cr.system_object.prototype.acts.SetLayerVisible,
 	cr.system_object.prototype.acts.SetObjectTimescale,
 	cr.system_object.prototype.acts.RestoreObjectTimescale,
+	cr.plugins_.Sprite.prototype.cnds.OnAnimFinished,
 	cr.plugins_.Sprite.prototype.acts.SetTowardPosition,
 	cr.plugins_.Sprite.prototype.acts.SetAngle,
 	cr.plugins_.Sprite.prototype.acts.RotateTowardAngle,
@@ -21685,7 +21767,6 @@ cr.getObjectRefTable = function () { return [
 	cr.plugins_.AJAX.prototype.acts.RequestFile,
 	cr.plugins_.Sprite.prototype.acts.SetSize,
 	cr.plugins_.Sprite.prototype.exps.Width,
-	cr.plugins_.Sprite.prototype.cnds.OnAnimFinished,
 	cr.system_object.prototype.cnds.ForEach,
 	cr.system_object.prototype.exps.distance,
 	cr.behaviors.Bullet.prototype.acts.SetEnabled,
@@ -21693,6 +21774,10 @@ cr.getObjectRefTable = function () { return [
 	cr.behaviors.Bullet.prototype.acts.SetGravity,
 	cr.behaviors.Bullet.prototype.acts.SetAngleOfMotion,
 	cr.behaviors.Bullet.prototype.acts.SetSpeed,
+	cr.behaviors.Rotate.prototype.acts.SetSpeed,
+	cr.system_object.prototype.exps.abs,
+	cr.plugins_.Sprite.prototype.exps.ImagePointX,
+	cr.plugins_.Sprite.prototype.exps.ImagePointY,
 	cr.plugins_.Sprite.prototype.cnds.OnDestroyed,
 	cr.plugins_.Sprite.prototype.cnds.OnCreated,
 	cr.plugins_.Text.prototype.acts.SetInstanceVar,
@@ -21710,6 +21795,6 @@ cr.getObjectRefTable = function () { return [
 	cr.plugins_.Mouse.prototype.cnds.IsButtonDown,
 	cr.plugins_.Dictionary.prototype.cnds.CompareValue,
 	cr.plugins_.Sprite.prototype.acts.SetAnimFrame,
-	cr.plugins_.Keyboard.prototype.cnds.OnKey
+	cr.plugins_.Keyboard.prototype.cnds.OnKey,
+	cr.system_object.prototype.cnds.OnLayoutStart
 ];};
-

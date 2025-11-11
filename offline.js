@@ -1,5 +1,5 @@
 ﻿{
-	"version": 1762845035,
+	"version": 1762856771,
 	"fileList": [
 		"data.js",
 		"c2runtime.js",
@@ -22,6 +22,16 @@
 		"images/mutebutton-sheet0.png",
 		"images/bucky-sheet0.png",
 		"images/bucky-sheet1.png",
+		"images/goosewalk-sheet0.png",
+		"images/goosewalk-sheet1.png",
+		"images/goosewalk-sheet2.png",
+		"images/goosefly-sheet0.png",
+		"images/goosefly-sheet1.png",
+		"images/explosion1-sheet0.png",
+		"images/explosion1-sheet1.png",
+		"images/stick-sheet0.png",
+		"images/stick-sheet1.png",
+		"images/stick-sheet2.png",
 		"images/startbutton-sheet0.png",
 		"images/startbutton-sheet1.png",
 		"images/quitbutton-sheet0.png",
