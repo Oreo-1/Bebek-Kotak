@@ -1,5 +1,5 @@
 ﻿{
-	"version": 1763022275,
+	"version": 1763026640,
 	"fileList": [
 		"data.js",
 		"c2runtime.js",
@@ -43,8 +43,7 @@
 		"images/buckystartingpage-sheet0.png",
 		"images/buckystartingpage-sheet1.png",
 		"images/startingpagebackground.png",
-		"media/quack-attack.m4a",
-		"media/bgm-game.m4a",
+		"media/game-bgm.ogg",
 		"icon-16.png",
 		"icon-32.png",
 		"icon-114.png",
@@ -52,6 +51,11 @@
 		"icon-256.png",
 		"loading-logo.png",
 		"wordlist.txt",
-		"wordlist_4letter.txt"
+		"wordlist_4letter.txt",
+		"pottaone.css",
+		"pottaone-regular-webfont.eot",
+		"pottaone-regular-webfont.svg",
+		"pottaone-regular-webfont.ttf",
+		"pottaone-regular-webfont.woff"
 	]
 }

@@ -24799,7 +24799,10 @@ cr.getObjectRefTable = function () { return [
 	cr.plugins_.Sprite.prototype.cnds.IsAnimPlaying,
 	cr.plugins_.Sprite.prototype.acts.SetAnim,
 	cr.plugins_.Mouse.prototype.cnds.OnAnyClick,
+	cr.plugins_.Text.prototype.acts.SetWebFont,
 	cr.system_object.prototype.exps.loadingprogress,
+	cr.plugins_.Sprite.prototype.acts.SetPos,
+	cr.system_object.prototype.exps.layoutwidth,
 	cr.system_object.prototype.cnds.OnLoadFinished,
 	cr.plugins_.Dictionary.prototype.acts.AddKey,
 	cr.plugins_.Function.prototype.cnds.OnFunction,
@@ -24812,7 +24815,6 @@ cr.getObjectRefTable = function () { return [
 	cr.plugins_.Sprite.prototype.acts.SetInstanceVar,
 	cr.plugins_.Sprite.prototype.acts.Spawn,
 	cr.plugins_.Sprite.prototype.cnds.CompareOpacity,
-	cr.plugins_.Sprite.prototype.acts.SetPos,
 	cr.plugins_.Sprite.prototype.exps.Y,
 	cr.plugins_.Sprite.prototype.exps.Height,
 	cr.system_object.prototype.acts.CreateObject,
@@ -24898,5 +24900,8 @@ cr.getObjectRefTable = function () { return [
 	cr.plugins_.Sprite.prototype.acts.SetAnimFrame,
 	cr.plugins_.Keyboard.prototype.cnds.OnKey,
 	cr.system_object.prototype.cnds.OnLayoutStart,
-	cr.plugins_.Audio.prototype.acts.PlayByName
+	cr.plugins_.Audio.prototype.acts.Play,
+	cr.system_object.prototype.cnds.OnLayoutEnd,
+	cr.plugins_.Audio.prototype.acts.Stop,
+	cr.plugins_.Audio.prototype.acts.SetMuted
 ];};
