@@ -1,5 +1,5 @@
 ﻿{
-	"version": 1763026640,
+	"version": 1763031506,
 	"fileList": [
 		"data.js",
 		"c2runtime.js",
@@ -22,6 +22,7 @@
 		"images/mutebutton-sheet0.png",
 		"images/bucky-sheet0.png",
 		"images/bucky-sheet1.png",
+		"images/bucky-sheet2.png",
 		"images/goosewalk-sheet0.png",
 		"images/goosewalk-sheet1.png",
 		"images/goosewalk-sheet2.png",
@@ -43,7 +44,12 @@
 		"images/buckystartingpage-sheet0.png",
 		"images/buckystartingpage-sheet1.png",
 		"images/startingpagebackground.png",
+		"images/loadingbackground.png",
+		"images/loadingbarbackground-sheet0.png",
+		"images/loadingbarfront-sheet0.png",
+		"images/loadingbarfiller.png",
 		"media/game-bgm.ogg",
+		"media/menu-bgm.ogg",
 		"icon-16.png",
 		"icon-32.png",
 		"icon-114.png",
