@@ -1,5 +1,5 @@
 ﻿{
-	"version": 1762856771,
+	"version": 1763022275,
 	"fileList": [
 		"data.js",
 		"c2runtime.js",
@@ -43,6 +43,8 @@
 		"images/buckystartingpage-sheet0.png",
 		"images/buckystartingpage-sheet1.png",
 		"images/startingpagebackground.png",
+		"media/quack-attack.m4a",
+		"media/bgm-game.m4a",
 		"icon-16.png",
 		"icon-32.png",
 		"icon-114.png",
