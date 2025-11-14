@@ -1,5 +1,5 @@
 ﻿{
-	"version": 1763103659,
+	"version": 1763103929,
 	"fileList": [
 		"data.js",
 		"c2runtime.js",
@@ -31,6 +31,7 @@
 		"images/goosewalk-sheet2.png",
 		"images/goosefly-sheet0.png",
 		"images/goosefly-sheet1.png",
+		"images/goosefly-sheet2.png",
 		"images/explosion1-sheet0.png",
 		"images/explosion1-sheet1.png",
 		"images/stick-sheet0.png",
