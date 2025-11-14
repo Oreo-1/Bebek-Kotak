@@ -1,5 +1,5 @@
 ﻿{
-	"version": 1763121248,
+	"version": 1763121889,
 	"fileList": [
 		"data.js",
 		"c2runtime.js",
@@ -67,6 +67,7 @@
 		"images/namatim-sheet0.png",
 		"images/homebutton2-sheet0.png",
 		"images/homebutton2-sheet1.png",
+		"images/tiledbackground.png",
 		"media/buck-attack.ogg",
 		"media/buck-hurt.ogg",
 		"media/buttonsounds.ogg",
