@@ -1,5 +1,5 @@
 ﻿{
-	"version": 1763112934,
+	"version": 1763116977,
 	"fileList": [
 		"data.js",
 		"c2runtime.js",
@@ -57,6 +57,7 @@
 		"images/buckygameover-sheet0.png",
 		"images/buckygameover-sheet1.png",
 		"images/buckygameover-sheet2.png",
+		"images/backgroundgameover.png",
 		"images/loadingbackground.png",
 		"images/loadingbarbackground-sheet0.png",
 		"images/loadingbarfront-sheet0.png",
@@ -66,9 +67,9 @@
 		"images/namatim-sheet0.png",
 		"images/homebutton2-sheet0.png",
 		"images/homebutton2-sheet1.png",
-		"images/backgroundgameover.png",
 		"media/buck-attack.ogg",
 		"media/buck-hurt.ogg",
+		"media/buttonsounds.ogg",
 		"media/game-bgm.ogg",
 		"media/menu-bgm.ogg",
 		"icon-16.png",
