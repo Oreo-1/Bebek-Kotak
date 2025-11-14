@@ -1,5 +1,5 @@
 ﻿{
-	"version": 1763116977,
+	"version": 1763120282,
 	"fileList": [
 		"data.js",
 		"c2runtime.js",
@@ -70,6 +70,7 @@
 		"media/buck-attack.ogg",
 		"media/buck-hurt.ogg",
 		"media/buttonsounds.ogg",
+		"media/goosehurt.ogg",
 		"media/game-bgm.ogg",
 		"media/menu-bgm.ogg",
 		"icon-16.png",
