@@ -5,7 +5,7 @@ const createWindow = () => {
   const win = new BrowserWindow({
     width: 1024,
     height: 576,
-    icon: path.join(__dirname, 'assets/icons/bucky.ico')  // Linux & Windows
+    icon: path.join(__dirname, 'assets/icons/bucky.png')  // Linux & Windows
   })
 
   win.loadFile('index.html');
