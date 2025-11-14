@@ -25308,5 +25308,8 @@ cr.getObjectRefTable = function () { return [
 	cr.plugins_.Sprite.prototype.acts.SetAnimFrame,
 	cr.plugins_.Keyboard.prototype.cnds.OnKey,
 	cr.plugins_.Audio.prototype.cnds.IsTagPlaying,
-	cr.plugins_.Audio.prototype.acts.SetMuted
+	cr.plugins_.Audio.prototype.acts.SetMuted,
+	cr.system_object.prototype.exps.choose,
+	cr.behaviors.Sin.prototype.acts.SetMagnitude,
+	cr.plugins_.Sprite.prototype.cnds.CompareY
 ];};

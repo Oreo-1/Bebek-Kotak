@@ -1,5 +1,5 @@
 ﻿{
-	"version": 1763125853,
+	"version": 1763130814,
 	"fileList": [
 		"data.js",
 		"c2runtime.js",
@@ -61,6 +61,9 @@
 		"images/buckygameover-sheet1.png",
 		"images/buckygameover-sheet2.png",
 		"images/backgroundgameover.png",
+		"images/restartbutton2-sheet0.png",
+		"images/restartbutton2-sheet1.png",
+		"images/restartbutton2-sheet2.png",
 		"images/loadingbackground.png",
 		"images/loadingbarbackground-sheet0.png",
 		"images/loadingbarfront-sheet0.png",
@@ -71,6 +74,10 @@
 		"images/homebutton2-sheet0.png",
 		"images/homebutton2-sheet1.png",
 		"images/homebutton2-sheet2.png",
+		"images/leaves-sheet0.png",
+		"images/leaves-sheet1.png",
+		"images/leaves-sheet2.png",
+		"images/leavesspawner-sheet0.png",
 		"media/buck-attack.ogg",
 		"media/buck-hurt.ogg",
 		"media/buttonsounds.ogg",
