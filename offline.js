@@ -1,5 +1,5 @@
 ﻿{
-	"version": 1763103236,
+	"version": 1763103659,
 	"fileList": [
 		"data.js",
 		"c2runtime.js",
@@ -12,6 +12,7 @@
 		"images/buckarrowpointer-sheet0.png",
 		"images/buckarrowplaceholder-sheet0.png",
 		"images/enemyspawnerland-sheet0.png",
+		"images/hearts-sheet0.png",
 		"images/back-sheet0.png",
 		"images/gamebackground.png",
 		"images/pausebackground-sheet0.png",
