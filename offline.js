@@ -1,5 +1,5 @@
 ﻿{
-	"version": 1763120282,
+	"version": 1763121248,
 	"fileList": [
 		"data.js",
 		"c2runtime.js",
@@ -71,6 +71,7 @@
 		"media/buck-hurt.ogg",
 		"media/buttonsounds.ogg",
 		"media/goosehurt.ogg",
+		"media/fireimpactless.ogg",
 		"media/game-bgm.ogg",
 		"media/menu-bgm.ogg",
 		"icon-16.png",
