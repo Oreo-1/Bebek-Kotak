@@ -13,15 +13,14 @@
     "build:win": "electron-builder --win"
   },
     "build": {
-    "appId": "com.mycompany.bebekkotak",
-    "productName": "Bebek Kotak",
+    "appId": "com.bebekdev.bebekkotak",
+    "productName": "Duck Type",
     "win": {
       "target": "nsis",
-      "icon": "icon.ico"
+      "icon": "assets/icons/bucky.ico"
     }
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "author": "BebekDev",
   "type": "commonjs"
 }

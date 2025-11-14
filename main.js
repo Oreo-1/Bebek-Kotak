@@ -1,13 +1,15 @@
 const { app, BrowserWindow } = require('electron/main')
+const path = require('path');
 
 const createWindow = () => {
   const win = new BrowserWindow({
-    width: 800,
-    height: 600
+    width: 1024,
+    height: 576,
+    icon: path.join(__dirname, 'assets/icons/bucky.ico')  // Linux & Windows
   })
 
   win.loadFile('index.html');
-  win.removeMenu(); // comment to display menu window
+  win.removeMenu();
 }
 
 app.whenReady().then(() => {

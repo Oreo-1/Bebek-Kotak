@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-	<title>Bebek-Kotak</title>
+	<title>DuckType - a Duck Typing Game</title>
 	
 	<!-- Standardised web app manifest -->
 	<link rel="manifest" href="appmanifest.json" />
@@ -33,7 +33,6 @@
 			-ms-touch-action: none;
 		}
 		canvas {
-			touch-action-delay: none;
 			touch-action: none;
 			-ms-touch-action: none;
 		}
@@ -45,16 +44,6 @@
 <body> 
 	<div id="fb-root"></div>
 	
-	<script>
-	// Issue a warning if trying to preview an exported project on disk.
-	(function(){
-		// Check for running exported on file protocol
-		if (window.location.protocol.substr(0, 4) === "file")
-		{
-			alert("Exported games won't work until you upload them. (When running on the file:/// protocol, browsers block many features from working for security reasons.)");
-		}
-	})();
-	</script>
 	
 	<!-- The canvas must be inside a div called c2canvasdiv -->
 	<div id="c2canvasdiv">
