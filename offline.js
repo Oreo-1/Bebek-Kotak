@@ -1,5 +1,5 @@
 ﻿{
-	"version": 1763087631,
+	"version": 1763095797,
 	"fileList": [
 		"data.js",
 		"c2runtime.js",
@@ -20,6 +20,8 @@
 		"images/homebutton-sheet0.png",
 		"images/restartbutton-sheet0.png",
 		"images/mutebutton-sheet0.png",
+		"images/pausebutton-sheet0.png",
+		"images/pausebutton-sheet1.png",
 		"images/bucky-sheet0.png",
 		"images/bucky-sheet1.png",
 		"images/bucky-sheet2.png",
@@ -51,6 +53,8 @@
 		"images/creditsbackground.png",
 		"images/creditsoverlay.png",
 		"images/namatim-sheet0.png",
+		"images/homebutton2-sheet0.png",
+		"images/homebutton2-sheet1.png",
 		"media/buck-attack.ogg",
 		"media/buck-hurt.ogg",
 		"media/game-bgm.ogg",
