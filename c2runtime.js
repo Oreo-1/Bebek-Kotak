@@ -24740,6 +24740,89 @@ cr.behaviors.Rotate = function(runtime)
 	};
 	behaviorProto.exps = new Exps();
 }());
+;
+;
+cr.behaviors.shadowcaster = function(runtime)
+{
+	this.runtime = runtime;
+	this.myTypes = [];
+};
+(function ()
+{
+	var behaviorProto = cr.behaviors.shadowcaster.prototype;
+	behaviorProto.Type = function(behavior, objtype)
+	{
+		this.behavior = behavior;
+		this.objtype = objtype;
+		this.runtime = behavior.runtime;
+		if (this.behavior.myTypes.indexOf(objtype) === -1)
+			this.behavior.myTypes.push(objtype);
+	};
+	var behtypeProto = behaviorProto.Type.prototype;
+	behtypeProto.onCreate = function()
+	{
+	};
+	behaviorProto.Instance = function(type, inst)
+	{
+		this.type = type;
+		this.behavior = type.behavior;
+		this.inst = inst;				// associated object instance to modify
+		this.runtime = type.runtime;
+	};
+	var behinstProto = behaviorProto.Instance.prototype;
+	behinstProto.onCreate = function()
+	{
+		this.inst.extra["shadowcasterEnabled"] = (this.properties[0] !== 0);
+		this.inst.extra["shadowcasterHeight"] = this.properties[1];
+		this.inst.extra["shadowcasterTag"] = this.properties[2];
+	};
+	behinstProto.tick = function ()
+	{
+	};
+	function Cnds() {};
+	Cnds.prototype.IsEnabled = function ()
+	{
+		return this.inst.extra["shadowcasterEnabled"];
+	};
+	Cnds.prototype.CompareHeight = function (cmp, x)
+	{
+		var h = this.inst.extra["shadowcasterHeight"];
+		return cr.do_cmp(h, cmp, x);
+	};
+	behaviorProto.cnds = new Cnds();
+	function Acts() {};
+	Acts.prototype.SetEnabled = function (e)
+	{
+		this.inst.extra["shadowcasterEnabled"] = !!e;
+	};
+	Acts.prototype.SetHeight = function (h)
+	{
+		if (this.inst.extra["shadowcasterHeight"] !== h)
+		{
+			this.inst.extra["shadowcasterHeight"] = h;
+			this.runtime.redraw = true;
+		}
+	};
+	Acts.prototype.SetTag = function (tag)
+	{
+		if (this.inst.extra["shadowcasterTag"] !== tag)
+		{
+			this.inst.extra["shadowcasterTag"] = tag;
+			this.runtime.redraw = true;
+		}
+	};
+	behaviorProto.acts = new Acts();
+	function Exps() {};
+	Exps.prototype.Height = function (ret)
+	{
+		ret.set_float(this.inst.extra["shadowcasterHeight"]);
+	};
+	Exps.prototype.Tag = function (ret)
+	{
+		ret.set_string(this.inst.extra["shadowcasterTag"]);
+	};
+	behaviorProto.exps = new Exps();
+}());
 cr.getObjectRefTable = function () { return [
 	cr.plugins_.Dictionary,
 	cr.plugins_.Function,
@@ -24755,6 +24838,7 @@ cr.getObjectRefTable = function () { return [
 	cr.plugins_.Audio,
 	cr.plugins_.Browser,
 	cr.behaviors.Rotate,
+	cr.behaviors.shadowcaster,
 	cr.behaviors.Bullet,
 	cr.behaviors.Pin,
 	cr.system_object.prototype.cnds.IsGroupActive,
@@ -24801,12 +24885,23 @@ cr.getObjectRefTable = function () { return [
 	cr.plugins_.Mouse.prototype.cnds.OnAnyClick,
 	cr.plugins_.Text.prototype.acts.SetWebFont,
 	cr.system_object.prototype.exps.loadingprogress,
-	cr.plugins_.Sprite.prototype.acts.SetPos,
-	cr.system_object.prototype.exps.layoutwidth,
-	cr.plugins_.Sprite.prototype.exps.Width,
 	cr.plugins_.TiledBg.prototype.acts.SetWidth,
+	cr.plugins_.Sprite.prototype.exps.Width,
+	cr.plugins_.Sprite.prototype.acts.SetPos,
+	cr.plugins_.TiledBg.prototype.exps.X,
+	cr.plugins_.TiledBg.prototype.exps.Width,
 	cr.system_object.prototype.cnds.OnLoadFinished,
 	cr.plugins_.Dictionary.prototype.acts.AddKey,
+	cr.system_object.prototype.cnds.PickNth,
+	cr.plugins_.Text.prototype.exps.Count,
+	cr.system_object.prototype.exps.abs,
+	cr.plugins_.Text.prototype.exps.Y,
+	cr.plugins_.Sprite.prototype.exps.Y,
+	cr.plugins_.Text.prototype.cnds.CompareY,
+	cr.system_object.prototype.exps.layoutheight,
+	cr.system_object.prototype.cnds.PickAll,
+	cr.plugins_.Text.prototype.acts.SetY,
+	cr.plugins_.Sprite.prototype.acts.SetY,
 	cr.plugins_.Function.prototype.cnds.OnFunction,
 	cr.system_object.prototype.acts.GoToLayoutByName,
 	cr.plugins_.Function.prototype.exps.Param,
@@ -24817,11 +24912,12 @@ cr.getObjectRefTable = function () { return [
 	cr.plugins_.Sprite.prototype.acts.SetInstanceVar,
 	cr.plugins_.Sprite.prototype.acts.Spawn,
 	cr.plugins_.Sprite.prototype.cnds.CompareOpacity,
-	cr.plugins_.Sprite.prototype.exps.Y,
-	cr.plugins_.Sprite.prototype.exps.Height,
 	cr.system_object.prototype.acts.CreateObject,
 	cr.plugins_.Sprite.prototype.exps.X,
 	cr.system_object.prototype.exps.angle,
+	cr.plugins_.Sprite.prototype.exps.Height,
+	cr.plugins_.Sprite.prototype.exps.ImagePointX,
+	cr.plugins_.Sprite.prototype.exps.ImagePointY,
 	cr.plugins_.Sprite.prototype.acts.SetOpacity,
 	cr.plugins_.Function.prototype.acts.SetReturnValue,
 	cr.system_object.prototype.cnds.For,
@@ -24831,9 +24927,9 @@ cr.getObjectRefTable = function () { return [
 	cr.plugins_.LocalStorage.prototype.acts.SetItem,
 	cr.system_object.prototype.exps.floor,
 	cr.system_object.prototype.acts.ResetGlobals,
+	cr.system_object.prototype.acts.SetLayerVisible,
 	cr.plugins_.Text.prototype.cnds.PickByUID,
 	cr.plugins_.Text.prototype.exps.X,
-	cr.plugins_.Text.prototype.exps.Y,
 	cr.plugins_.Sprite.prototype.exps.UID,
 	cr.behaviors.Pin.prototype.acts.Pin,
 	cr.plugins_.Sprite.prototype.acts.MoveToBottom,
@@ -24843,9 +24939,8 @@ cr.getObjectRefTable = function () { return [
 	cr.plugins_.LocalStorage.prototype.acts.CheckItemExists,
 	cr.plugins_.progressbar.prototype.acts.SetProgress,
 	cr.plugins_.progressbar.prototype.exps.Progress,
-	cr.plugins_.Text.prototype.exps.Count,
-	cr.system_object.prototype.cnds.PickNth,
 	cr.plugins_.Text.prototype.cnds.PickDistance,
+	cr.plugins_.Text.prototype.acts.SetAngle,
 	cr.plugins_.Sprite.prototype.acts.Destroy,
 	cr.plugins_.LocalStorage.prototype.cnds.OnItemMissing,
 	cr.plugins_.LocalStorage.prototype.cnds.OnItemExists,
@@ -24853,7 +24948,6 @@ cr.getObjectRefTable = function () { return [
 	cr.plugins_.LocalStorage.prototype.cnds.OnItemGet,
 	cr.plugins_.LocalStorage.prototype.exps.ItemValue,
 	cr.plugins_.progressbar.prototype.exps.Maximum,
-	cr.system_object.prototype.acts.SetLayerVisible,
 	cr.system_object.prototype.acts.SetObjectTimescale,
 	cr.system_object.prototype.acts.RestoreObjectTimescale,
 	cr.plugins_.Sprite.prototype.cnds.OnAnimFinished,
@@ -24866,6 +24960,9 @@ cr.getObjectRefTable = function () { return [
 	cr.plugins_.Text.prototype.exps.Opacity,
 	cr.plugins_.Text.prototype.acts.Destroy,
 	cr.system_object.prototype.exps.layoutname,
+	cr.plugins_.Sprite.prototype.cnds.CompareX,
+	cr.plugins_.Sprite.prototype.acts.SetPosToObject,
+	cr.plugins_.Sprite.prototype.acts.SetX,
 	cr.plugins_.AJAX.prototype.cnds.OnAnyComplete,
 	cr.plugins_.AJAX.prototype.exps.Tag,
 	cr.plugins_.AJAX.prototype.exps.LastData,
@@ -24874,20 +24971,15 @@ cr.getObjectRefTable = function () { return [
 	cr.system_object.prototype.cnds.ForEach,
 	cr.system_object.prototype.exps.distance,
 	cr.behaviors.Bullet.prototype.acts.SetEnabled,
-	cr.plugins_.Sprite.prototype.cnds.CompareX,
 	cr.behaviors.Bullet.prototype.acts.SetGravity,
 	cr.behaviors.Bullet.prototype.acts.SetAngleOfMotion,
 	cr.behaviors.Bullet.prototype.acts.SetSpeed,
 	cr.behaviors.Rotate.prototype.acts.SetSpeed,
-	cr.system_object.prototype.exps.abs,
-	cr.plugins_.Sprite.prototype.exps.ImagePointX,
-	cr.plugins_.Sprite.prototype.exps.ImagePointY,
 	cr.plugins_.Sprite.prototype.cnds.OnDestroyed,
 	cr.plugins_.Sprite.prototype.cnds.OnCreated,
 	cr.plugins_.Text.prototype.acts.SetInstanceVar,
 	cr.plugins_.Text.prototype.cnds.CompareInstanceVar,
 	cr.plugins_.Text.prototype.cnds.OnDestroyed,
-	cr.plugins_.Text.prototype.acts.SetAngle,
 	cr.plugins_.Text.prototype.exps.Width,
 	cr.plugins_.Text.prototype.exps.Height,
 	cr.plugins_.Text.prototype.acts.SetPos,
@@ -24904,5 +24996,6 @@ cr.getObjectRefTable = function () { return [
 	cr.plugins_.Audio.prototype.acts.Play,
 	cr.system_object.prototype.cnds.OnLayoutEnd,
 	cr.plugins_.Audio.prototype.acts.Stop,
-	cr.plugins_.Audio.prototype.acts.SetMuted
+	cr.plugins_.Audio.prototype.acts.SetMuted,
+	cr.system_object.prototype.cnds.TriggerOnce
 ];};

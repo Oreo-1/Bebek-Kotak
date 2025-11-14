@@ -1,5 +1,5 @@
 ﻿{
-	"version": 1763031769,
+	"version": 1763087631,
 	"fileList": [
 		"data.js",
 		"c2runtime.js",
@@ -48,6 +48,11 @@
 		"images/loadingbarbackground-sheet0.png",
 		"images/loadingbarfront-sheet0.png",
 		"images/loadingbarfiller.png",
+		"images/creditsbackground.png",
+		"images/creditsoverlay.png",
+		"images/namatim-sheet0.png",
+		"media/buck-attack.ogg",
+		"media/buck-hurt.ogg",
 		"media/game-bgm.ogg",
 		"media/menu-bgm.ogg",
 		"icon-16.png",
