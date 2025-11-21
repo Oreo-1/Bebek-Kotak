@@ -25305,6 +25305,7 @@ cr.getObjectRefTable = function () { return [
 	cr.system_object.prototype.cnds.OnLayoutStart,
 	cr.plugins_.progressbar.prototype.acts.SetMaximum,
 	cr.plugins_.progressbar.prototype.acts.SetProgress,
+	cr.plugins_.Browser.prototype.acts.ExecJs,
 	cr.plugins_.Text.prototype.acts.SetWebFont,
 	cr.system_object.prototype.exps.loadingprogress,
 	cr.plugins_.TiledBg.prototype.acts.SetWidth,
