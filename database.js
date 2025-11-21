@@ -19,7 +19,7 @@ async function deletePaste() {
   payload.append("api_dev_key", DEV_KEY);
   payload.append("api_paste_key", key);
 
-  const res = await fetch("https://pastebin.com/api/api_post.php", {
+  const res = await fetch("https://cors.io/?url=https://pastebin.com/api/api_post.php", {
     method: "POST",
     body: payload
   });
@@ -40,7 +40,7 @@ async function createPaste(text) {
   payload.append("api_dev_key", DEV_KEY);
   payload.append("api_paste_code", text);
 
-  const res = await fetch("https://pastebin.com/api/api_post.php", {
+  const res = await fetch("https://cors.io/?url=https://pastebin.com/api/api_post.php", {
     method: "POST",
     body: payload
   });
@@ -58,7 +58,7 @@ async function showPaste() {
   payload.append("api_dev_key", DEV_KEY);
   payload.append("api_paste_key", getPasteKey());
 
-  const res = await fetch("https://pastebin.com/api/api_raw.php", {
+  const res = await fetch("https://cors.io/?url=https://pastebin.com/api/api_raw.php", {
     method: "POST",
     body: payload
   });
@@ -72,7 +72,7 @@ async function listPaste() {
   payload.append("api_user_key", getUserKey());
   payload.append("api_dev_key", DEV_KEY);
 
-  const res = await fetch("https://pastebin.com/api/api_post.php", {
+  const res = await fetch("https://cors.io/?url=https://pastebin.com/api/api_post.php", {
     method: "POST",
     body: payload
   });
