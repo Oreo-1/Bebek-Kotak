@@ -1,6 +1,11 @@
 const DEV_KEY = "wpDZTII4PQykRIyVXEE-d47y7jeoa6Cg";
 const USER_KEY = "03c47281460f4e62ab60e3a497262807";
 
+async function fetchBodyOnly(jsonRes) {
+  return jsonRes.body;
+}
+
+
 function getUserKey() {
   return USER_KEY;
 }
@@ -18,9 +23,9 @@ async function deletePaste() {
   const res = await fetch("https://cors.io/?url=https://pastebin.com/api/api_post.php", {
     method: "POST",
     body: payload
-  });
+  }).then(response => response.json());
 
-  return res.text();
+  return fetchBodyOnly(res);
 }
 
 async function createPaste(text) {
@@ -39,9 +44,9 @@ async function createPaste(text) {
   const res = await fetch("https://cors.io/?url=https://pastebin.com/api/api_post.php", {
     method: "POST",
     body: payload
-  });
+  }).then(response => response.json());
 
-  return res.text();
+  return fetchBodyOnly(res);
 }
 
 async function showPaste() {
@@ -57,9 +62,9 @@ async function showPaste() {
   const res = await fetch("https://cors.io/?url=https://pastebin.com/api/api_raw.php", {
     method: "POST",
     body: payload
-  });
+  }).then(response => response.json());
 
-  return res.text();
+  return fetchBodyOnly(res);
 }
 
 async function getPasteKey() {
@@ -71,14 +76,18 @@ async function getPasteKey() {
   const res = await fetch("https://cors.io/?url=https://pastebin.com/api/api_post.php", {
     method: "POST",
     body: payload
-  });
+  }).then(response => response.json());
 
-  const xml = await res.text();
+  const xml = await fetchBodyOnly(res);
   const keys = [...xml.matchAll(/<paste_key>(.*?)<\/paste_key>/g)].map(x => x[1]);
   return keys[0] || "";
 }
 
 async function addPaste(text) {
   const existing = (await getPasteKey()) ? await showPaste() : "";
-  return createPaste(text + existing);
+  if(existing != ""){
+    return createPaste(text + ";" + existing);
+  } else {
+    return createPaste(text);
+  }
 }
