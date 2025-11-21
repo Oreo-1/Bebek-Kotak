@@ -1,21 +1,21 @@
 const DEV_KEY = "wpDZTII4PQykRIyVXEE-d47y7jeoa6Cg";
 const USER_KEY = "03c47281460f4e62ab60e3a497262807";
 
-function get_paste_key() {
+function getPasteKey() {
   return globalThis.__pasteKey || "";
 }
 
-function get_user_key() {
+function getUserKey() {
   return USER_KEY;
 }
 
-async function delete_paste() {
-  const key = get_paste_key();
+async function deletePaste() {
+  const key = getPasteKey();
   if (!key) return "";
   
   const payload = new URLSearchParams();
   payload.append("api_option", "delete");
-  payload.append("api_user_key", get_user_key());
+  payload.append("api_user_key", getUserKey());
   payload.append("api_dev_key", DEV_KEY);
   payload.append("api_paste_key", key);
 
@@ -27,12 +27,12 @@ async function delete_paste() {
   return res.text();
 }
 
-async function create_paste(text) {
-  await delete_paste();
+async function createPaste(text) {
+  await deletePaste();
 
   const payload = new URLSearchParams();
   payload.append("api_option", "paste");
-  payload.append("api_user_key", get_user_key());
+  payload.append("api_user_key", getUserKey());
   payload.append("api_paste_private", "2");
   payload.append("api_paste_name", "ducktype_database");
   payload.append("api_paste_expire_date", "N");
@@ -51,12 +51,12 @@ async function create_paste(text) {
   return key;
 }
 
-async function show_paste() {
+async function showPaste() {
   const payload = new URLSearchParams();
   payload.append("api_option", "show_paste");
-  payload.append("api_user_key", get_user_key());
+  payload.append("api_user_key", getUserKey());
   payload.append("api_dev_key", DEV_KEY);
-  payload.append("api_paste_key", get_paste_key());
+  payload.append("api_paste_key", getPasteKey());
 
   const res = await fetch("https://pastebin.com/api/api_raw.php", {
     method: "POST",
@@ -66,10 +66,10 @@ async function show_paste() {
   return res.text();
 }
 
-async function list_paste() {
+async function listPaste() {
   const payload = new URLSearchParams();
   payload.append("api_option", "list");
-  payload.append("api_user_key", get_user_key());
+  payload.append("api_user_key", getUserKey());
   payload.append("api_dev_key", DEV_KEY);
 
   const res = await fetch("https://pastebin.com/api/api_post.php", {
@@ -82,6 +82,6 @@ async function list_paste() {
 }
 
 async function addPaste(text) {
-  const existing = get_paste_key() ? await show_paste() : "";
-  return create_paste(text + existing);
+  const existing = getPasteKey() ? await showPaste() : "";
+  return createPaste(text + existing);
 }
