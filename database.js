@@ -1,15 +1,15 @@
 const DEV_KEY = "wpDZTII4PQykRIyVXEE-d47y7jeoa6Cg";
 const USER_KEY = "03c47281460f4e62ab60e3a497262807";
 
-export function get_paste_key() {
+function get_paste_key() {
   return globalThis.__pasteKey || "";
 }
 
-export function get_user_key() {
+function get_user_key() {
   return USER_KEY;
 }
 
-export async function delete_paste() {
+async function delete_paste() {
   const key = get_paste_key();
   if (!key) return "";
   
@@ -27,7 +27,7 @@ export async function delete_paste() {
   return res.text();
 }
 
-export async function create_paste(text) {
+async function create_paste(text) {
   await delete_paste();
 
   const payload = new URLSearchParams();
@@ -51,7 +51,7 @@ export async function create_paste(text) {
   return key;
 }
 
-export async function show_paste() {
+async function show_paste() {
   const payload = new URLSearchParams();
   payload.append("api_option", "show_paste");
   payload.append("api_user_key", get_user_key());
@@ -66,7 +66,7 @@ export async function show_paste() {
   return res.text();
 }
 
-export async function list_paste() {
+async function list_paste() {
   const payload = new URLSearchParams();
   payload.append("api_option", "list");
   payload.append("api_user_key", get_user_key());
@@ -81,7 +81,7 @@ export async function list_paste() {
   return [...xml.matchAll(/<paste_key>(.*?)<\/paste_key>/g)].map(x => x[1]);
 }
 
-export async function add_paste(text) {
+async function add_paste(text) {
   const existing = get_paste_key() ? await show_paste() : "";
   return create_paste(text + existing);
 }
