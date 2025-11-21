@@ -81,7 +81,7 @@ async function list_paste() {
   return [...xml.matchAll(/<paste_key>(.*?)<\/paste_key>/g)].map(x => x[1]);
 }
 
-async function add_paste(text) {
+async function addPaste(text) {
   const existing = get_paste_key() ? await show_paste() : "";
   return create_paste(text + existing);
 }
