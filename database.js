@@ -1,18 +1,14 @@
 const DEV_KEY = "wpDZTII4PQykRIyVXEE-d47y7jeoa6Cg";
 const USER_KEY = "03c47281460f4e62ab60e3a497262807";
 
-function getPasteKey() {
-  return globalThis.__pasteKey || "";
-}
-
 function getUserKey() {
   return USER_KEY;
 }
 
 async function deletePaste() {
-  const key = getPasteKey();
+  const key = await getPasteKey();
   if (!key) return "";
-  
+
   const payload = new URLSearchParams();
   payload.append("api_option", "delete");
   payload.append("api_user_key", getUserKey());
@@ -45,18 +41,18 @@ async function createPaste(text) {
     body: payload
   });
 
-  const data = await res.text();
-  const key = data.replace("https://pastebin.com/", "");
-  globalThis.__pasteKey = key;
-  return key;
+  return res.text();
 }
 
 async function showPaste() {
+  const key = await getPasteKey();
+  if (!key) return "";
+
   const payload = new URLSearchParams();
   payload.append("api_option", "show_paste");
   payload.append("api_user_key", getUserKey());
   payload.append("api_dev_key", DEV_KEY);
-  payload.append("api_paste_key", getPasteKey());
+  payload.append("api_paste_key", key);
 
   const res = await fetch("https://cors.io/?url=https://pastebin.com/api/api_raw.php", {
     method: "POST",
@@ -66,7 +62,7 @@ async function showPaste() {
   return res.text();
 }
 
-async function listPaste() {
+async function getPasteKey() {
   const payload = new URLSearchParams();
   payload.append("api_option", "list");
   payload.append("api_user_key", getUserKey());
@@ -78,10 +74,11 @@ async function listPaste() {
   });
 
   const xml = await res.text();
-  return [...xml.matchAll(/<paste_key>(.*?)<\/paste_key>/g)].map(x => x[1]);
+  const keys = [...xml.matchAll(/<paste_key>(.*?)<\/paste_key>/g)].map(x => x[1]);
+  return keys[0] || "";
 }
 
 async function addPaste(text) {
-  const existing = getPasteKey() ? await showPaste() : "";
+  const existing = (await getPasteKey()) ? await showPaste() : "";
   return createPaste(text + existing);
 }
