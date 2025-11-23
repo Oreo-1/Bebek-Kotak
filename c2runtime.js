@@ -25426,5 +25426,6 @@ cr.getObjectRefTable = function () { return [
 	cr.plugins_.Audio.prototype.cnds.IsTagPlaying,
 	cr.plugins_.Audio.prototype.acts.SetMuted,
 	cr.system_object.prototype.exps.choose,
-	cr.behaviors.Sin.prototype.acts.SetMagnitude
+	cr.behaviors.Sin.prototype.acts.SetMagnitude,
+	cr.plugins_.Browser.prototype.exps.ExecJS
 ];};

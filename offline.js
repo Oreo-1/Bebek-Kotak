@@ -1,5 +1,5 @@
 ﻿{
-	"version": 1763862149,
+	"version": 1763863544,
 	"fileList": [
 		"data.js",
 		"c2runtime.js",
@@ -75,6 +75,9 @@
 		"images/leaves-sheet0.png",
 		"images/leaves-sheet1.png",
 		"images/leaves-sheet2.png",
+		"images/blackoverlay.png",
+		"images/buckyfetching-sheet0.png",
+		"images/loadingdots-sheet0.png",
 		"media/buck-attack.ogg",
 		"media/buck-hurt.ogg",
 		"media/buttonsounds.ogg",
