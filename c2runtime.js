@@ -25242,6 +25242,7 @@ cr.behaviors.shadowcaster = function(runtime)
 	behaviorProto.exps = new Exps();
 }());
 cr.getObjectRefTable = function () { return [
+	cr.plugins_.Dictionary,
 	cr.plugins_.Function,
 	cr.plugins_.Keyboard,
 	cr.plugins_.Mouse,
@@ -25253,7 +25254,6 @@ cr.getObjectRefTable = function () { return [
 	cr.plugins_.Touch,
 	cr.plugins_.AJAX,
 	cr.plugins_.Audio,
-	cr.plugins_.Dictionary,
 	cr.plugins_.Browser,
 	cr.behaviors.Rotate,
 	cr.behaviors.scrollto,

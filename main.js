@@ -9,7 +9,7 @@ const createWindow = () => {
   })
 
   win.loadFile('index.html');
-  win.removeMenu();
+  // win.removeMenu();
 }
 
 app.whenReady().then(() => {
