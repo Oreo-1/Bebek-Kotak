@@ -1,25 +1,58 @@
-name: Build Project
+name: Build and Release
 
 on:
   push:
     branches:
-      - main # Or your desired branch
+      - main # or your default branch name
 
 jobs:
   build:
     runs-on: windows-latest
+    # Grant necessary permissions to the default GITHUB_TOKEN
+    permissions:
+      contents: write # This permission is needed to create releases and upload assets
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
+    - name: Checkout repository code
+      uses: actions/checkout@v4
+      with:
+        # Fetch the full history to make sure the release action has access to all tags/commits
+        fetch-depth: 0 
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20' # Specify your Node.js version
+    - name: Use Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20.x'
 
-      - name: Install dependencies
-        run: npm install
+    - name: Install dependencies
+      run: npm ci
 
-      - name: Run build script
-        run: npm run build:win
+    - name: Run build script
+      run: npm run build:win
+
+    # --- Release Automation Steps ---
+
+    - name: Create Release
+      id: create_release
+      uses: actions/create-release@v1
+      env:
+        # Use the default GITHUB_TOKEN provided by GitHub Actions
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        tag_name: v1.0.${{ github.run_number }} # Generates a simple version tag (e.g., v1.0.1)
+        release_name: Release v1.0.${{ github.run_number }}
+        body: |
+          Automated build and release for run number ${{ github.run_number }}.
+        draft: false
+        prerelease: false
+
+    - name: Upload Release Asset
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        # The path to your build output file(s) - adjust as needed
+        asset_path: ./dist/*
+        asset_name: my-build-output.zip # Name the asset file(s)
+        asset_content_type: application/zip # Set the correct content type
