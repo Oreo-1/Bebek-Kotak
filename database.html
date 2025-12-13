@@ -6,36 +6,197 @@
     <title>Ducktype Leaderboard ✨</title>
     <link href="https://fonts.googleapis.com/css2?family=Potta+One&display=swap" rel="stylesheet">
     <style>
-        /* ... (CSS SAMA SEPERTI SEBELUMNYA) ... */
-        :root { --bg-color: #fff0f5; --primary: #FFAB91; --secondary: #DCEDC8; --text: #5D4037; --gold: #FFD54F; --silver: #E0E0E0; --bronze: #A1887F; }
-        body { font-family: 'Potta One', cursive; background-color: var(--bg-color); background-image: radial-gradient(#FFCCBC 2px, transparent 2px); background-size: 25px 25px; margin: 0; padding: 20px; display: flex; justify-content: center; align-items: center; min-height: 100vh; color: var(--text); }
-        .container { background: #FFF; width: 100%; max-width: 700px; padding: 2rem; border-radius: 30px; box-shadow: 0 10px 0 #5D4037; text-align: center; border: 6px solid #5D4037; }
-        h1 { color: #FF7043; font-size: 2.5rem; margin: 0; text-shadow: 3px 3px 0 #FFF; margin-bottom: 5px; }
-        p.subtitle { color: #90A4AE; margin-top: 0; margin-bottom: 25px; }
-        .table-container { overflow-x: auto; border-radius: 20px; border: 4px solid var(--secondary); background: #fff; max-height: 500px; overflow-y: auto; }
-        table { width: 100%; border-collapse: collapse; white-space: nowrap; }
-        thead { background-color: var(--secondary); position: sticky; top: 0; z-index: 10; }
-        th { padding: 15px; color: #5D4037; font-size: 1.1rem; text-transform: uppercase; }
-        td { padding: 12px 15px; border-bottom: 2px solid #f0f0f0; font-size: 1rem; }
-        tr:nth-child(even) { background-color: #FAFAFA; }
-        tr:hover { background-color: #FFF3E0; }
-        .rank-badge { display: inline-flex; justify-content: center; align-items: center; width: 35px; height: 35px; border-radius: 50%; background: #eee; color: #555; box-shadow: 0 3px 0 rgba(0,0,0,0.2); }
-        tr:nth-child(1) .rank-badge { background: var(--gold); color: #FFF; }
-        tr:nth-child(2) .rank-badge { background: var(--silver); color: #FFF; }
-        tr:nth-child(3) .rank-badge { background: var(--bronze); color: #FFF; }
-        .score-text { color: #FF7043; }
-        .date-text { font-size: 0.8rem; color: #999; font-family: 'Potta One'; }
-        .btn-refresh { margin-top: 25px; background-color: var(--primary); color: #5D4037; border: 4px solid #5D4037; padding: 12px 35px; font-size: 1.2rem; border-radius: 50px; cursor: pointer; font-family: 'Potta One', cursive; box-shadow: 0 6px 0 #5D4037; transition: all 0.1s; }
-        .btn-refresh:active { transform: translateY(6px); box-shadow: 0 0 0 #5D4037; }
+        :root { 
+            --bg-color: #FFF8E1;      /* Cream Bebek */
+            --bg-dots: #FFE0B2;       /* Oranye Muda untuk Pattern */
+            --primary: #FFA726;       /* Oranye Cerah */
+            --primary-dark: #F57C00;  /* Oranye Tua */
+            --header-bg: #FFCC80;     /* Warna Header Tabel */
+            --text: #4E342E;          /* Coklat Tua */
+            --border-color: #4E342E;  /* Border Coklat Kartun */
+            --gold: #FFD700; 
+            --silver: #E0E0E0; 
+            --bronze: #CD7F32; 
+        }
+
+        /* RESET & GLOBAL FONT */
+        * {
+            box-sizing: border-box;
+            font-family: 'Potta One', cursive; /* Paksa semua font */
+        }
+
+        /* LAYOUT FULL SCREEN TANPA SCROLL BODY */
+        body { 
+            background-color: var(--bg-color); 
+            background-image: radial-gradient(var(--bg-dots) 3px, transparent 3px); 
+            background-size: 30px 30px; 
+            margin: 0; 
+            padding: 0;
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            /* 100dvh menyesuaikan tinggi layar HP (mengabaikan address bar browser) */
+            height: 100vh;
+            height: 100dvh; 
+            overflow: hidden; /* Mencegah scroll di body */
+            color: var(--text); 
+        }
+
+        /* CONTAINER UTAMA */
+        .container { 
+            background: #FFF; 
+            width: 95%;           /* Lebih lebar di mobile */
+            max-width: 1000px;    /* Maksimal lebar lebih besar dari sebelumnya (700px) */
+            height: 90%;          /* Mengambil 90% tinggi layar */
+            max-height: 900px;
+            padding: 1.5rem; 
+            border-radius: 30px; 
+            box-shadow: 10px 10px 0 var(--border-color); 
+            text-align: center; 
+            border: 5px solid var(--border-color); 
+            display: flex;        /* Menggunakan flex agar anak elemen bisa diatur */
+            flex-direction: column; /* Susun vertikal */
+            position: relative;
+        }
+
+        /* DEKORASI BEBEK */
+        .container::after {
+            content: '🦆';
+            font-size: 3rem;
+            position: absolute;
+            top: -25px;
+            right: -10px;
+            transform: rotate(15deg);
+        }
+
+        h1 { 
+            color: var(--primary-dark); 
+            font-size: clamp(1.8rem, 4vw, 2.5rem); /* Responsive font size */
+            margin: 0; 
+            text-shadow: 2px 2px 0 #FFF, 4px 4px 0 rgba(0,0,0,0.1); 
+        }
+        
+        p.subtitle { 
+            color: #8D6E63; 
+            margin-top: 5px; 
+            margin-bottom: 15px; 
+            font-size: 1rem;
+        }
+
+        /* AREA TABEL SCROLLABLE */
+        .table-container { 
+            border-radius: 15px; 
+            border: 4px solid var(--primary); 
+            background: #fff; 
+            /* KUNCI UTAMA: Mengambil sisa ruang (flex-grow) dan bisa di-scroll */
+            flex: 1; 
+            overflow-y: auto; 
+            min-height: 0; 
+            box-shadow: inset 0 0 10px rgba(0,0,0,0.05);
+            /* Custom Scrollbar styling untuk Chrome/Safari */
+            scrollbar-width: thin;
+            scrollbar-color: var(--primary) #fff;
+        }
+
+        .table-container::-webkit-scrollbar { width: 8px; }
+        .table-container::-webkit-scrollbar-track { background: #fff; }
+        .table-container::-webkit-scrollbar-thumb { background-color: var(--primary); border-radius: 20px; border: 2px solid #fff; }
+
+        table { width: 100%; border-collapse: separate; border-spacing: 0; white-space: nowrap; }
+
+        /* STICKY HEADER */
+        thead { 
+            position: sticky; 
+            top: 0; 
+            z-index: 10; 
+        }
+
+        th { 
+            background-color: var(--header-bg); 
+            padding: 15px; 
+            color: var(--text); 
+            font-size: 1.1rem; 
+            text-transform: uppercase; 
+            border-bottom: 3px solid var(--primary-dark);
+            text-shadow: 1px 1px 0 rgba(255,255,255,0.5);
+        }
+
+        td { 
+            padding: 12px 15px; 
+            border-bottom: 2px solid #FFF3E0; 
+            font-size: 1rem; 
+        }
+
+        tr:nth-child(even) { background-color: #FFFDE7; }
+        tr:hover { background-color: #FFECB3; transform: scale(1); } /* Efek hover simpel */
+
+        /* BADGE RANKING */
+        .rank-badge { 
+            display: inline-flex; 
+            justify-content: center; 
+            align-items: center; 
+            width: 32px; 
+            height: 32px; 
+            border-radius: 50%; 
+            background: #eee; 
+            color: #555; 
+            font-weight: bold;
+            border: 2px solid var(--border-color);
+        }
+        
+        tr:nth-child(1) .rank-badge { background: var(--gold); color: #FFF; border-color: #B8860B; box-shadow: 0 2px 0 #B8860B; }
+        tr:nth-child(2) .rank-badge { background: var(--silver); color: #FFF; border-color: #999; box-shadow: 0 2px 0 #999; }
+        tr:nth-child(3) .rank-badge { background: var(--bronze); color: #FFF; border-color: #8D6E63; box-shadow: 0 2px 0 #8D6E63; }
+
+        .score-text { color: var(--primary-dark); font-size: 1.1rem; }
+        .date-text { font-size: 0.8rem; color: #A1887F; }
+
+        /* TOMBOL REFRESH DI BAWAH */
+        .btn-wrapper {
+            margin-top: 15px;
+            padding-bottom: 5px; /* Spasi sedikit dari bawah container */
+        }
+
+        .btn-refresh { 
+            background-color: var(--primary); 
+            color: #fff;
+            text-shadow: 1px 1px 0 var(--border-color);
+            border: 3px solid var(--border-color); 
+            padding: 12px 40px; 
+            font-size: 1.1rem; 
+            border-radius: 50px; 
+            cursor: pointer; 
+            box-shadow: 0 5px 0 var(--border-color); 
+            transition: all 0.1s; 
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-refresh:hover { filter: brightness(1.1); }
+        .btn-refresh:active { transform: translateY(5px); box-shadow: 0 0 0 var(--border-color); }
+
         .loading { font-size: 1.2rem; color: #aaa; padding: 20px; }
+
+        /* RESPONSIF UNTUK LAYAR KECIL */
+        @media (max-width: 480px) {
+            .container { padding: 1rem; border-width: 4px; }
+            h1 { font-size: 1.8rem; }
+            th, td { padding: 10px; font-size: 0.9rem; }
+            .rank-badge { width: 25px; height: 25px; font-size: 0.9rem; }
+        }
     </style>
 </head>
 <body>
 
     <div class="container">
-        <h1>🏆 TOP 100</h1>
-        <p class="subtitle">Ducktype Hall of Fame</p>
+        <!-- Header Section (Stay Sticky) -->
+        <div>
+            <h1>🏆 TOP 100</h1>
+            <p class="subtitle">Ducktype Hall of Fame 🐤</p>
+        </div>
 
+        <!-- Scrollable Section -->
         <div class="table-container">
             <table>
                 <thead>
@@ -52,11 +213,15 @@
             </table>
         </div>
 
-        <button class="btn-refresh" onclick="refreshLeaderboard()">
-            🔄 Refresh
-        </button>
+        <!-- Button Section (Stay Sticky) -->
+        <div class="btn-wrapper">
+            <button class="btn-refresh" onclick="refreshLeaderboard()">
+                <span>🔄</span> Refresh
+            </button>
+        </div>
     </div>
 
+    <!-- Jangan mengubah path database ini sesuai request -->
     <script src="database.js"></script>
 
     <script>
