@@ -270,7 +270,7 @@
             try {
                 // Panggil fungsi dari database.js
                 // getDatabase() mengembalikan Promise berisi array data
-                let data = await getLeaderboardViaWhateverOrigin();
+                let data = await getDatabase();
 
                 if (!data || data.length === 0) {
                     tableBody.innerHTML = `<tr><td colspan="4" style="padding: 30px; color: #aaa;">Belum ada data skor 😢</td></tr>`;
