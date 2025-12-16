@@ -25365,6 +25365,7 @@ cr.getObjectRefTable = function () { return [
 	cr.system_object.prototype.cnds.ForEachOrdered,
 	cr.plugins_.Text.prototype.cnds.PickDistance,
 	cr.plugins_.Text.prototype.acts.SetAngle,
+	cr.system_object.prototype.exps.right,
 	cr.plugins_.Dictionary.prototype.cnds.CompareValue,
 	cr.plugins_.Audio.prototype.acts.Play,
 	cr.plugins_.Sprite.prototype.acts.Destroy,
