@@ -25354,7 +25354,6 @@ cr.getObjectRefTable = function () { return [
 	cr.plugins_.Text.prototype.cnds.PickByUID,
 	cr.plugins_.Text.prototype.exps.X,
 	cr.plugins_.Sprite.prototype.exps.UID,
-	cr.behaviors.Pin.prototype.acts.Pin,
 	cr.plugins_.Sprite.prototype.acts.MoveToBottom,
 	cr.plugins_.Text.prototype.acts.SetWidth,
 	cr.plugins_.Sprite.prototype.cnds.PickByUID,
