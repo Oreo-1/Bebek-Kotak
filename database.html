@@ -5,256 +5,218 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ducktype Leaderboard ✨</title>
     <link href="https://fonts.googleapis.com/css2?family=Potta+One&display=swap" rel="stylesheet">
+    
     <style>
-        :root { 
-            --bg-color: #FFF8E1;      /* Cream Bebek */
-            --bg-dots: #FFE0B2;       /* Oranye Muda untuk Pattern */
-            --primary: #FFA726;       /* Oranye Cerah */
-            --primary-dark: #F57C00;  /* Oranye Tua */
-            --header-bg: #FFCC80;     /* Warna Header Tabel */
-            --text: #4E342E;          /* Coklat Tua */
-            --border-color: #4E342E;  /* Border Coklat Kartun */
-            --gold: #FFD700; 
-            --silver: #E0E0E0; 
-            --bronze: #CD7F32; 
+        :root {
+            --bg-color: #fff0f5;  
+            --primary: #FFAB91;
+            --secondary: #DCEDC8;
+            --text: #5D4037;
+            --gold: #FFD54F;
+            --silver: #E0E0E0;
+            --bronze: #A1887F;
         }
 
-        /* RESET & GLOBAL FONT */
-        * {
-            box-sizing: border-box;
-            font-family: 'Potta One', cursive; /* Paksa semua font */
-        }
+        /* Force All Fonts to Potta One */
+        * { font-family: 'Potta One', cursive; }
 
-        /* LAYOUT FULL SCREEN TANPA SCROLL BODY */
-        body { 
-            background-color: var(--bg-color); 
-            background-image: radial-gradient(var(--bg-dots) 3px, transparent 3px); 
-            background-size: 30px 30px; 
-            margin: 0; 
-            padding: 0;
-            display: flex; 
-            justify-content: center; 
-            align-items: center; 
-            /* 100dvh menyesuaikan tinggi layar HP (mengabaikan address bar browser) */
-            height: 100vh;
-            height: 100dvh; 
-            overflow: hidden; /* Mencegah scroll di body */
-            color: var(--text); 
-        }
-
-        /* CONTAINER UTAMA */
-        .container { 
-            background: #FFF; 
-            width: 95%;           /* Lebih lebar di mobile */
-            max-width: 1000px;    /* Maksimal lebar lebih besar dari sebelumnya (700px) */
-            height: 90%;          /* Mengambil 90% tinggi layar */
-            max-height: 900px;
-            padding: 1.5rem; 
-            border-radius: 30px; 
-            box-shadow: 10px 10px 0 var(--border-color); 
-            text-align: center; 
-            border: 5px solid var(--border-color); 
-            display: flex;        /* Menggunakan flex agar anak elemen bisa diatur */
-            flex-direction: column; /* Susun vertikal */
-            position: relative;
-        }
-
-        /* DEKORASI BEBEK */
-        .container::after {
-            content: '🦆';
-            font-size: 3rem;
-            position: absolute;
-            top: -25px;
-            right: -10px;
-            transform: rotate(15deg);
-        }
-
-        h1 { 
-            color: var(--primary-dark); 
-            font-size: clamp(1.8rem, 4vw, 2.5rem); /* Responsive font size */
-            margin: 0; 
-            text-shadow: 2px 2px 0 #FFF, 4px 4px 0 rgba(0,0,0,0.1); 
-        }
-        
-        p.subtitle { 
-            color: #8D6E63; 
-            margin-top: 5px; 
-            margin-bottom: 15px; 
-            font-size: 1rem;
-        }
-
-        /* AREA TABEL SCROLLABLE */
-        .table-container { 
-            border-radius: 15px; 
-            border: 4px solid var(--primary); 
-            background: #fff; 
-            /* KUNCI UTAMA: Mengambil sisa ruang (flex-grow) dan bisa di-scroll */
-            flex: 1; 
-            overflow-y: auto; 
-            min-height: 0; 
-            box-shadow: inset 0 0 10px rgba(0,0,0,0.05);
-            /* Custom Scrollbar styling untuk Chrome/Safari */
-            scrollbar-width: thin;
-            scrollbar-color: var(--primary) #fff;
-        }
-
-        .table-container::-webkit-scrollbar { width: 8px; }
-        .table-container::-webkit-scrollbar-track { background: #fff; }
-        .table-container::-webkit-scrollbar-thumb { background-color: var(--primary); border-radius: 20px; border: 2px solid #fff; }
-
-        table { width: 100%; border-collapse: separate; border-spacing: 0; white-space: nowrap; }
-
-        /* STICKY HEADER */
-        thead { 
-            position: sticky; 
-            top: 0; 
-            z-index: 10; 
-        }
-
-        th { 
-            background-color: var(--header-bg); 
-            padding: 15px; 
-            color: var(--text); 
-            font-size: 1.1rem; 
-            text-transform: uppercase; 
-            border-bottom: 3px solid var(--primary-dark);
-            text-shadow: 1px 1px 0 rgba(255,255,255,0.5);
-        }
-
-        td { 
-            padding: 12px 15px; 
-            border-bottom: 2px solid #FFF3E0; 
-            font-size: 1rem; 
-        }
-
-        tr:nth-child(even) { background-color: #FFFDE7; }
-        tr:hover { background-color: #FFECB3; transform: scale(1); } /* Efek hover simpel */
-
-        /* BADGE RANKING */
-        .rank-badge { 
-            display: inline-flex; 
-            justify-content: center; 
-            align-items: center; 
-            width: 32px; 
-            height: 32px; 
-            border-radius: 50%; 
-            background: #eee; 
-            color: #555; 
-            font-weight: bold;
-            border: 2px solid var(--border-color);
-        }
-        
-        tr:nth-child(1) .rank-badge { background: var(--gold); color: #FFF; border-color: #B8860B; box-shadow: 0 2px 0 #B8860B; }
-        tr:nth-child(2) .rank-badge { background: var(--silver); color: #FFF; border-color: #999; box-shadow: 0 2px 0 #999; }
-        tr:nth-child(3) .rank-badge { background: var(--bronze); color: #FFF; border-color: #8D6E63; box-shadow: 0 2px 0 #8D6E63; }
-
-        .score-text { color: var(--primary-dark); font-size: 1.1rem; }
-        .date-text { font-size: 0.8rem; color: #A1887F; }
-
-        /* TOMBOL REFRESH DI BAWAH */
-        .btn-wrapper {
-            margin-top: 15px;
-            padding-bottom: 5px; /* Spasi sedikit dari bawah container */
-        }
-
-        .btn-refresh { 
-            background-color: var(--primary); 
-            color: #fff;
-            text-shadow: 1px 1px 0 var(--border-color);
-            border: 3px solid var(--border-color); 
-            padding: 12px 40px; 
-            font-size: 1.1rem; 
-            border-radius: 50px; 
-            cursor: pointer; 
-            box-shadow: 0 5px 0 var(--border-color); 
-            transition: all 0.1s; 
-            display: inline-flex;
+        body {
+            background-color: var(--bg-color);
+            background-image: radial-gradient(#FFCCBC 2px, transparent 2px);
+            background-size: 25px 25px;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
             align-items: center;
-            gap: 8px;
+            min-height: 100vh;
+            color: var(--text);
         }
 
-        .btn-refresh:hover { filter: brightness(1.1); }
-        .btn-refresh:active { transform: translateY(5px); box-shadow: 0 0 0 var(--border-color); }
+        .container {
+            background: #FFF;
+            width: 95%; /* Lebih lebar untuk responsif */
+            max-width: 900px; /* Max width diperbesar */
+            padding: 1.5rem;
+            border-radius: 30px;
+            box-shadow: 0 10px 0 #5D4037;
+            text-align: center;
+            border: 6px solid #5D4037;
+        }
+
+        h1 {
+            color: #FF7043;
+            font-size: 2.2rem;
+            margin: 0 0 5px 0;
+            text-shadow: 3px 3px 0 #FFF;
+        }
+
+        p.subtitle {
+            color: #90A4AE;
+            margin-top: 0;
+            margin-bottom: 20px;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Table Wrapper */
+        .table-container {
+            overflow-x: auto; /* Scroll horizontal jika layar kecil */
+            border-radius: 20px;
+            border: 4px solid var(--secondary);
+            background: #fff;
+            max-height: 60vh;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            white-space: nowrap; /* Mencegah teks turun baris */
+            min-width: 700px; /* Memastikan tabel tidak gepeng di HP */
+        }
+
+        thead {
+            background-color: var(--secondary);
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        th {
+            padding: 15px 10px;
+            color: #5D4037;
+            font-size: 1rem;
+            text-transform: uppercase;
+        }
+
+        td {
+            padding: 12px 10px;
+            border-bottom: 2px solid #f0f0f0;
+            font-size: 0.95rem;
+        }
+
+        tr:nth-child(even) { background-color: #FAFAFA; }
+        tr:hover { background-color: #FFF3E0; }
+
+        /* Badges */
+        .rank-badge {
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: #eee;
+            color: #555;
+            box-shadow: 0 3px 0 rgba(0,0,0,0.2);
+            font-size: 0.9rem;
+        }
+        tr:nth-child(1) .rank-badge { background: var(--gold); color: #FFF; }
+        tr:nth-child(2) .rank-badge { background: var(--silver); color: #FFF; }
+        tr:nth-child(3) .rank-badge { background: var(--bronze); color: #FFF; }
+
+        .score-text { color: #FF7043; font-size: 1.1rem; }
+        .stat-text { color: #78909C; font-size: 0.9rem; }
+        .update-badge { background: #B2DFDB; padding: 2px 8px; border-radius: 10px; font-size: 0.8rem; color: #00695C; }
+
+        .btn-refresh {
+            margin-top: 20px;
+            background-color: var(--primary);
+            color: #5D4037;
+            border: 4px solid #5D4037;
+            padding: 10px 30px;
+            font-size: 1.2rem;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 6px 0 #5D4037;
+            transition: all 0.1s;
+        }
+        .btn-refresh:active { transform: translateY(6px); box-shadow: 0 0 0 #5D4037; }
 
         .loading { font-size: 1.2rem; color: #aaa; padding: 20px; }
 
-        /* RESPONSIF UNTUK LAYAR KECIL */
-        @media (max-width: 480px) {
-            .container { padding: 1rem; border-width: 4px; }
+        /* Mobile Adjustments */
+        @media (max-width: 600px) {
+            .container { padding: 1rem; width: 90%; }
             h1 { font-size: 1.8rem; }
-            th, td { padding: 10px; font-size: 0.9rem; }
-            .rank-badge { width: 25px; height: 25px; font-size: 0.9rem; }
+            th, td { font-size: 0.85rem; padding: 10px 5px; }
         }
     </style>
 </head>
 <body>
 
     <div class="container">
-        <!-- Header Section (Stay Sticky) -->
-        <div>
-            <h1>🏆 TOP 100</h1>
-            <p class="subtitle">Ducktype Hall of Fame 🐤</p>
-        </div>
+        <h1>🏆 TOP 100</h1>
+        <p class="subtitle">Ducktype Hall of Fame • v1.5.0</p>
 
-        <!-- Scrollable Section -->
         <div class="table-container">
             <table>
                 <thead>
                     <tr>
-                        <th width="10%">#</th>
-                        <th width="35%" style="text-align: left; padding-left: 20px;">Name</th>
-                        <th width="25%">Score</th>
-                        <th width="30%">Date</th>
+                        <th width="5%">#</th>
+                        <th width="25%" style="text-align: left; padding-left: 15px;">Name</th>
+                        <th width="15%">Score</th>
+                        <th width="10%">WPM</th>
+                        <th width="10%">Acc</th>
+                        <th width="15%">Time</th>
+                        <th width="10%">Updates</th>
+                        <th width="10%">Date</th>
                     </tr>
                 </thead>
                 <tbody id="leaderboard-body">
-                    <tr><td colspan="4" class="loading">Loading data... 🦆</td></tr>
+                    <tr><td colspan="8" class="loading">Loading data... 🦆</td></tr>
                 </tbody>
             </table>
         </div>
 
-        <!-- Button Section (Stay Sticky) -->
-        <div class="btn-wrapper">
-            <button class="btn-refresh" onclick="refreshLeaderboard()">
-                <span>🔄</span> Refresh
-            </button>
-        </div>
+        <button class="btn-refresh" onclick="refreshLeaderboard()">
+            🔄 Refresh
+        </button>
     </div>
 
-    <!-- Jangan mengubah path database ini sesuai request -->
+    <!-- Import Database JS -->
     <script src="database.js"></script>
 
     <script>
         async function refreshLeaderboard() {
             const tableBody = document.getElementById('leaderboard-body');
-            tableBody.innerHTML = `<tr><td colspan="4" class="loading">Fetching... 🦆</td></tr>`;
+            tableBody.innerHTML = `<tr><td colspan="8" class="loading">Fetching... 🦆</td></tr>`;
 
             try {
-                // 1. Ambil Data
                 let data = await getDatabase();
 
                 if (!data || data.length === 0) {
-                    tableBody.innerHTML = `<tr><td colspan="4" style="padding: 30px; color: #aaa;">Belum ada data skor 😢</td></tr>`;
+                    tableBody.innerHTML = `<tr><td colspan="8" style="padding: 30px; color: #aaa;">Belum ada data skor 😢</td></tr>`;
                     return;
                 }
 
-                // 2. SORTING OTOMATIS (Client Side)
-                // Memastikan data urut dari skor terbesar ke terkecil
+                // Sorting Client Side
                 data.sort((a, b) => b.score - a.score);
 
-                // 3. Render
                 let html = "";
                 data.forEach((player, index) => {
-                    // Rank dihitung dari index loop (0 jadi 1, dst)
                     let rank = index + 1;
-                    let dateDisplay = player.datetime || "-";
+                    // Format Date (Hanya Tanggal & Bulan agar muat)
+                    let fullDate = player.datetime || "";
+                    let shortDate = fullDate.split(" ")[0] || "-"; // Ambil DD-MM-YYYY
+                    
+                    // Default values jika data lama belum punya field baru
+                    let wpm = player.wpm || "-";
+                    let acc = player.accuracy || "-";
+                    let time = player.playtime || "-";
+                    let updates = player.updateCount || 1;
 
                     html += `
                         <tr>
                             <td><div class="rank-badge">${rank}</div></td>
-                            <td style="text-align: left; padding-left: 20px;">${player.name}</td>
+                            <td style="text-align: left; padding-left: 15px;">${player.name}</td>
                             <td class="score-text">${player.score}</td>
-                            <td class="date-text">${dateDisplay}</td>
+                            <td class="stat-text">${wpm}</td>
+                            <td class="stat-text">${acc}</td>
+                            <td class="stat-text">${time}</td>
+                            <td><span class="update-badge">x${updates}</span></td>
+                            <td class="stat-text" style="font-size:0.75rem">${shortDate}</td>
                         </tr>
                     `;
                 });
@@ -263,7 +225,7 @@
 
             } catch (error) {
                 console.error(error);
-                tableBody.innerHTML = `<tr><td colspan="4" style="color: red;">Gagal memuat data.</td></tr>`;
+                tableBody.innerHTML = `<tr><td colspan="8" style="color: red;">Gagal memuat data.</td></tr>`;
             }
         }
 
