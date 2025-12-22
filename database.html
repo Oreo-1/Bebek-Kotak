@@ -1,235 +1,188 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ducktype Leaderboard ✨</title>
-    <link href="https://fonts.googleapis.com/css2?family=Potta+One&display=swap" rel="stylesheet">
-    
+    <title>Bebek Kotak - Top 100 Leaderboard</title>
+    <link rel="stylesheet" type="text/css" href="pottaone.css" />
     <style>
-        :root {
-            --bg-color: #fff0f5;  
-            --primary: #FFAB91;
-            --secondary: #DCEDC8;
-            --text: #5D4037;
-            --gold: #FFD54F;
-            --silver: #E0E0E0;
-            --bronze: #A1887F;
-        }
-
-        /* Force All Fonts to Potta One */
-        * { font-family: 'Potta One', cursive; }
-
         body {
-            background-color: var(--bg-color);
-            background-image: radial-gradient(#FFCCBC 2px, transparent 2px);
-            background-size: 25px 25px;
+            background-color: #DCEDC8;
+            /* Hijau muda khas bebek */
+            font-family: 'Potta One', cursive;
+            color: #5D4037;
             margin: 0;
             padding: 20px;
             display: flex;
-            justify-content: center;
+            flex-direction: column;
             align-items: center;
-            min-height: 100vh;
-            color: var(--text);
-        }
-
-        .container {
-            background: #FFF;
-            width: 95%; /* Lebih lebar untuk responsif */
-            max-width: 900px; /* Max width diperbesar */
-            padding: 1.5rem;
-            border-radius: 30px;
-            box-shadow: 0 10px 0 #5D4037;
-            text-align: center;
-            border: 6px solid #5D4037;
         }
 
         h1 {
             color: #FF7043;
-            font-size: 2.2rem;
-            margin: 0 0 5px 0;
             text-shadow: 3px 3px 0 #FFF;
-        }
-
-        p.subtitle {
-            color: #90A4AE;
-            margin-top: 0;
+            font-size: 2.5rem;
             margin-bottom: 20px;
-            font-size: 0.9rem;
         }
 
-        /* Responsive Table Wrapper */
         .table-container {
-            overflow-x: auto; /* Scroll horizontal jika layar kecil */
-            border-radius: 20px;
-            border: 4px solid var(--secondary);
-            background: #fff;
-            max-height: 60vh;
-            overflow-y: auto;
-            -webkit-overflow-scrolling: touch;
+            width: 100%;
+            max-width: 800px;
+            background: white;
+            border: 6px solid #5D4037;
+            border-radius: 30px;
+            overflow: hidden;
+            box-shadow: 0 12px 0 #5D4037;
         }
 
         table {
             width: 100%;
             border-collapse: collapse;
-            white-space: nowrap; /* Mencegah teks turun baris */
-            min-width: 700px; /* Memastikan tabel tidak gepeng di HP */
-        }
-
-        thead {
-            background-color: var(--secondary);
-            position: sticky;
-            top: 0;
-            z-index: 10;
+            background: #FFF;
         }
 
         th {
-            padding: 15px 10px;
-            color: #5D4037;
-            font-size: 1rem;
-            text-transform: uppercase;
+            background-color: #AED581;
+            padding: 15px;
+            border-bottom: 4px solid #5D4037;
+            font-size: 1.1rem;
         }
 
         td {
-            padding: 12px 10px;
-            border-bottom: 2px solid #f0f0f0;
-            font-size: 0.95rem;
+            padding: 12px 15px;
+            text-align: center;
+            border-bottom: 2px solid #DCEDC8;
+            font-size: 1rem;
         }
 
-        tr:nth-child(even) { background-color: #FAFAFA; }
-        tr:hover { background-color: #FFF3E0; }
-
-        /* Badges */
-        .rank-badge {
-            display: inline-flex;
-            justify-content: center;
-            align-items: center;
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
-            background: #eee;
-            color: #555;
-            box-shadow: 0 3px 0 rgba(0,0,0,0.2);
-            font-size: 0.9rem;
+        tr:nth-child(even) {
+            background-color: #F1F8E9;
         }
-        tr:nth-child(1) .rank-badge { background: var(--gold); color: #FFF; }
-        tr:nth-child(2) .rank-badge { background: var(--silver); color: #FFF; }
-        tr:nth-child(3) .rank-badge { background: var(--bronze); color: #FFF; }
 
-        .score-text { color: #FF7043; font-size: 1.1rem; }
-        .stat-text { color: #78909C; font-size: 0.9rem; }
-        .update-badge { background: #B2DFDB; padding: 2px 8px; border-radius: 10px; font-size: 0.8rem; color: #00695C; }
-
-        .btn-refresh {
-            margin-top: 20px;
-            background-color: var(--primary);
-            color: #5D4037;
-            border: 4px solid #5D4037;
-            padding: 10px 30px;
-            font-size: 1.2rem;
-            border-radius: 50px;
-            cursor: pointer;
-            box-shadow: 0 6px 0 #5D4037;
-            transition: all 0.1s;
+        tr:last-child td {
+            border-bottom: none;
         }
-        .btn-refresh:active { transform: translateY(6px); box-shadow: 0 0 0 #5D4037; }
 
-        .loading { font-size: 1.2rem; color: #aaa; padding: 20px; }
+        .rank-1 {
+            color: #FFD700;
+            font-size: 1.4rem;
+        }
 
-        /* Mobile Adjustments */
-        @media (max-width: 600px) {
-            .container { padding: 1rem; width: 90%; }
-            h1 { font-size: 1.8rem; }
-            th, td { font-size: 0.85rem; padding: 10px 5px; }
+        /* Emas */
+        .rank-2 {
+            color: #C0C0C0;
+        }
+
+        /* Perak */
+        .rank-3 {
+            color: #CD7F32;
+        }
+
+        /* Perunggu */
+
+        .loading-text {
+            margin-top: 50px;
+            font-size: 1.5rem;
+            animation: blink 1s infinite;
+        }
+
+        @keyframes blink {
+            50% {
+                opacity: 0.5;
+            }
         }
     </style>
 </head>
+
 <body>
 
-    <div class="container">
-        <h1>🏆 TOP 100</h1>
-        <p class="subtitle">Ducktype Hall of Fame • v1.5.0</p>
+    <h1>🏆 TOP 100 BEBEK</h1>
 
-        <div class="table-container">
-            <table>
-                <thead>
-                    <tr>
-                        <th width="5%">#</th>
-                        <th width="25%" style="text-align: left; padding-left: 15px;">Name</th>
-                        <th width="15%">Score</th>
-                        <th width="10%">WPM</th>
-                        <th width="10%">Acc</th>
-                        <th width="15%">Time</th>
-                        <th width="10%">Updates</th>
-                        <th width="10%">Date</th>
-                    </tr>
-                </thead>
-                <tbody id="leaderboard-body">
-                    <tr><td colspan="8" class="loading">Loading data... 🦆</td></tr>
-                </tbody>
-            </table>
-        </div>
+    <div id="loading" class="loading-text">MENGAMBIL DATA...</div>
 
-        <button class="btn-refresh" onclick="refreshLeaderboard()">
-            🔄 Refresh
-        </button>
+    <div class="table-container" id="content" style="display: none;">
+        <table>
+            <thead>
+                <tr>
+                    <th>POS</th>
+                    <th>NAMA</th>
+                    <th>SKOR</th>
+                    <th>WPM</th>
+                    <th>ACC</th>
+                    <th>TIME</th>
+                </tr>
+            </thead>
+            <tbody id="leaderboard-body">
+                <!-- Data akan masuk di sini -->
+            </tbody>
+        </table>
     </div>
 
-    <!-- Import Database JS -->
-    <script src="database.js"></script>
-
     <script>
-        async function refreshLeaderboard() {
-            const tableBody = document.getElementById('leaderboard-body');
-            tableBody.innerHTML = `<tr><td colspan="8" class="loading">Fetching... 🦆</td></tr>`;
+        const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwmiURnBkFjZCzI4aYfpfN13ehNPg1VJX_7nBLqkKjHdEfE0VDrK-VJU5GWn0ZZsXRD/exec";
 
+        /**
+         * Mengubah waktu (detik atau string) menjadi format MM:SS
+         */
+        function formatPlaytime(timeValue) {
+            // Jika sudah dalam format mm:ss (ada titik dua), kembalikan langsung
+            if (typeof timeValue === 'string' && timeValue.includes(':')) {
+                return timeValue;
+            }
+
+            // Jika berupa angka (detik), lakukan konversi
+            const totalSeconds = parseInt(timeValue) || 0;
+            const minutes = Math.floor(totalSeconds / 60);
+            const seconds = totalSeconds % 60;
+
+            const mDisplay = String(minutes).padStart(2, '0');
+            const sDisplay = String(seconds).padStart(2, '0');
+
+            return `${mDisplay}:${sDisplay}`;
+        }
+
+        async function loadLeaderboard() {
             try {
-                let data = await getDatabase();
+                const response = await fetch(SCRIPT_URL);
+                const data = await response.json();
 
-                if (!data || data.length === 0) {
-                    tableBody.innerHTML = `<tr><td colspan="8" style="padding: 30px; color: #aaa;">Belum ada data skor 😢</td></tr>`;
-                    return;
-                }
+                const tbody = document.getElementById('leaderboard-body');
+                tbody.innerHTML = '';
 
-                // Sorting Client Side
-                data.sort((a, b) => b.score - a.score);
-
-                let html = "";
                 data.forEach((player, index) => {
-                    let rank = index + 1;
-                    // Format Date (Hanya Tanggal & Bulan agar muat)
-                    let fullDate = player.datetime || "";
-                    let shortDate = fullDate.split(" ")[0] || "-"; // Ambil DD-MM-YYYY
-                    
-                    // Default values jika data lama belum punya field baru
-                    let wpm = player.wpm || "-";
-                    let acc = player.accuracy || "-";
-                    let time = player.playtime || "-";
-                    let updates = player.updateCount || 1;
+                    const row = document.createElement('tr');
+                    const rank = index + 1;
 
-                    html += `
-                        <tr>
-                            <td><div class="rank-badge">${rank}</div></td>
-                            <td style="text-align: left; padding-left: 15px;">${player.name}</td>
-                            <td class="score-text">${player.score}</td>
-                            <td class="stat-text">${wpm}</td>
-                            <td class="stat-text">${acc}</td>
-                            <td class="stat-text">${time}</td>
-                            <td><span class="update-badge">x${updates}</span></td>
-                            <td class="stat-text" style="font-size:0.75rem">${shortDate}</td>
-                        </tr>
+                    // Tambahkan class khusus untuk juara 1, 2, 3
+                    let rankClass = "";
+                    if (rank === 1) rankClass = "rank-1";
+                    else if (rank === 2) rankClass = "rank-2";
+                    else if (rank === 3) rankClass = "rank-3";
+
+                    row.innerHTML = `
+                        <td class="${rankClass}">${rank}</td>
+                        <td>${player.name}</td>
+                        <td><strong>${player.score}</strong></td>
+                        <td>${player.wpm}</td>
+                        <td>${player.accuracy}</td>
+                        <td>${formatPlaytime(player.playtime)}</td>
                     `;
+                    tbody.appendChild(row);
                 });
 
-                tableBody.innerHTML = html;
+                document.getElementById('loading').style.display = 'none';
+                document.getElementById('content').style.display = 'block';
 
             } catch (error) {
-                console.error(error);
-                tableBody.innerHTML = `<tr><td colspan="8" style="color: red;">Gagal memuat data.</td></tr>`;
+                console.error("Gagal memuat data:", error);
+                document.getElementById('loading').innerText = "GAGAL MEMUAT DATA 😭";
             }
         }
 
-        document.addEventListener('DOMContentLoaded', refreshLeaderboard);
+        // Jalankan saat halaman dibuka
+        window.onload = loadLeaderboard;
     </script>
 </body>
+
 </html>

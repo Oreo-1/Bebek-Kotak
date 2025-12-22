@@ -1,0 +1,34 @@
+/* Container Modal (Transparan karena loading dihandle C2) */
+#duck-overlay { 
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
+    background-color: rgba(0, 0, 0, 0.5); z-index: 9999; 
+    display: flex; justify-content: center; align-items: center; 
+    font-family: 'Potta One', cursive;
+}
+
+/* Kotak Pesan */
+#duck-modal { 
+    background-color: #DCEDC8; border: 6px solid #5D4037; 
+    border-radius: 30px; padding: 25px; width: 85%; max-width: 400px; 
+    text-align: center; color: #5D4037; box-shadow: 0 10px 0 #5D4037; 
+    animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+#duck-modal h2 { margin-top: 0; font-size: 1.5rem; color: #FF7043; }
+#duck-modal p { font-size: 1rem; line-height: 1.4; margin: 15px 0; }
+
+#duck-input { 
+    width: 80%; padding: 12px; border: 4px solid #AED581; 
+    border-radius: 15px; font-family: 'Potta One'; font-size: 1.1rem; 
+    text-align: center; margin-bottom: 20px; outline: none;
+}
+
+#duck-btn { 
+    background-color: #FFAB91; color: #5D4037; border: 4px solid #5D4037; 
+    padding: 10px 40px; font-size: 1.2rem; border-radius: 50px; 
+    cursor: pointer; font-family: 'Potta One'; box-shadow: 0 5px 0 #5D4037; 
+}
+
+#duck-btn:active { transform: translateY(4px); box-shadow: 0 1px 0 #5D4037; }
+
+@keyframes popIn { from { transform: scale(0.8); opacity: 0; } to { transform: scale(1); opacity: 1; } }
