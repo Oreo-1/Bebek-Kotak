@@ -126,21 +126,18 @@
          * Mengubah waktu (detik atau string) menjadi format MM:SS
          */
         function formatPlaytime(timeValue) {
-            // Jika sudah dalam format mm:ss (ada titik dua), kembalikan langsung
-            if (typeof timeValue === 'string' && timeValue.includes(':')) {
-                return timeValue;
-            }
+            // Jika data sudah mm:ss (misal "02:30"), biarkan
+            if (typeof timeValue === 'string' && timeValue.includes(':')) return timeValue;
 
-            // Jika berupa angka (detik), lakukan konversi
-            const totalSeconds = parseInt(timeValue) || 0;
-            const minutes = Math.floor(totalSeconds / 60);
-            const seconds = totalSeconds % 60;
-
-            const mDisplay = String(minutes).padStart(2, '0');
-            const sDisplay = String(seconds).padStart(2, '0');
-
-            return `${mDisplay}:${sDisplay}`;
+            // Jika data berupa angka detik (misal 150), ubah ke mm:ss
+            const secs = parseInt(timeValue) || 0;
+            const m = Math.floor(secs / 60).toString().padStart(2, '0');
+            const s = (secs % 60).toString().padStart(2, '0');
+            return `${m}:${s}`;
         }
+
+        // Saat render tabel:
+        // row.innerHTML = `... <td>${formatPlaytime(player.playtime)}</td> ...`;
 
         async function loadLeaderboard() {
             try {
