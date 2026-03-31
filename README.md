@@ -4,7 +4,7 @@
 </div>
 
 <p align="center">
-<img src="/assets/gh/gametitle.png">
+<img src="assets/gh/gametitle.png">
 </p>
 
 ---
@@ -12,7 +12,7 @@
 <!-- absolutely shameless README copy paste of our earlier game. by the way, while you're at it, check out or first game https://github.com/Gibekkk/GarudaKotak :v -->
 
 ## Play as Bucky the Duck
-<img src="/assets/gh/lazy-ahh-duck.gif" style="width: 100px; height: auto; border-radius: 20px">
+<img src="assets/gh/lazy-ahh-duck.gif" style="width: 100px; height: auto; border-radius: 20px">
 <p>
 A swarm of angry goose is after him and he needs your help before they get to him! Type quickly and accurately to help Bucky smack the furious geese away and potential debries they may hurl at him. But I wonder.. What’s got all the geese riled up? Why are they so angry? Almost feels like someone is eating all of their food…
 <p> 
@@ -34,7 +34,7 @@ https://oreo-1.github.io/Bebek-Kotak/
 
 ## Dev Team Overview
 <p align="center">
-<img src="/assets/gh/bebekdev.png" style="width: 40%; height: auto">
+<img src="assets/gh/bebekdev.png" style="width: 40%; height: auto">
 </p>
 
 ### Developer:
