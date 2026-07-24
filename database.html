@@ -126,6 +126,8 @@
     <a href="index.html" class="back-btn">BACK TO GAME</a>
 
     <script>
+        let lastRawData = null; // Menyimpan data terakhir untuk dicek perubahannya
+
         /**
          * Format playtime to MM:SS
          */
@@ -153,26 +155,36 @@
 
                 // 2. Read data
                 const rawData = window.electronAPI.readDB();
+
+                // Cek apakah data berubah. Jika sama persis, abaikan proses render ulang
+                if (rawData === lastRawData) {
+                    return;
+                }
+                
+                // Simpan data terbaru
+                lastRawData = rawData;
+
                 const data = JSON.parse(rawData || "[]");
 
                 if (data.length === 0) {
                     statusMsg.innerText = "NO DATA AVAILABLE YET";
+                    statusMsg.style.display = 'block';
+                    content.style.display = 'none';
                     statusMsg.classList.remove('loading-text');
                     statusMsg.classList.add('empty-text');
                     return;
                 }
 
-                // 3. Sort data (Score > WPM > Accuracy) just in case
+                // 3. Sort data (Score > WPM > Accuracy)
                 data.sort((a, b) => {
                     if (b.score !== a.score) return b.score - a.score;
                     if (b.wpm !== a.wpm) return b.wpm - a.wpm;
                     return b.accuracy - a.accuracy;
                 });
 
-                // 4. Render Table
-                tbody.innerHTML = '';
+                // 4. Render Table (Gunakan string penggabungan agar lebih efisien di DOM)
+                let newHtml = '';
                 data.forEach((player, index) => {
-                    const row = document.createElement('tr');
                     const rank = index + 1;
 
                     let rankClass = "";
@@ -180,16 +192,19 @@
                     else if (rank === 2) rankClass = "rank-2";
                     else if (rank === 3) rankClass = "rank-3";
 
-                    row.innerHTML = `
-                        <td class="${rankClass}">${rank}</td>
-                        <td>${player.name}</td>
-                        <td><strong>${player.score.toLocaleString()}</strong></td>
-                        <td>${player.wpm}</td>
-                        <td>${player.accuracy}%</td>
-                        <td>${formatPlaytime(player.playtime)}</td>
+                    newHtml += `
+                        <tr>
+                            <td class="${rankClass}">${rank}</td>
+                            <td>${player.name}</td>
+                            <td><strong>${player.score.toLocaleString()}</strong></td>
+                            <td>${player.wpm}</td>
+                            <td>${player.accuracy}%</td>
+                            <td>${formatPlaytime(player.playtime)}</td>
+                        </tr>
                     `;
-                    tbody.appendChild(row);
                 });
+                
+                tbody.innerHTML = newHtml;
 
                 // 5. Show Content
                 statusMsg.style.display = 'none';
@@ -198,12 +213,17 @@
             } catch (error) {
                 console.error("Failed to load leaderboard:", error);
                 statusMsg.innerText = "FAILED TO LOAD DATABASE 😭";
+                statusMsg.style.display = 'block';
+                content.style.display = 'none';
                 statusMsg.classList.remove('loading-text');
             }
         }
 
-        // Run on load
-        window.onload = loadLeaderboard;
+        // Jalankan saat load pertama kali, lalu ulangi setiap 5000ms (5 detik)
+        window.onload = () => {
+            loadLeaderboard();
+            setInterval(loadLeaderboard, 5000);
+        };
     </script>
 </body>
 
