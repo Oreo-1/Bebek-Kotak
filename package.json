@@ -4,7 +4,7 @@
     "electron-builder": "^26.0.12"
   },
   "name": "ducktype",
-  "version": "1.6.0",
+  "version": "1.6.1",
   "description": "",
   "main": "main.js",
   "scripts": {
@@ -13,7 +13,7 @@
     "build:win": "electron-builder --win",
     "rmdist": "rm -rf dist/ release/"
   },
-    "build": {
+  "build": {
     "appId": "com.bebekdev.bebekkotak",
     "productName": "Duck Type",
     "win": {
